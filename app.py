@@ -1,11 +1,18 @@
+#https://hackernoon.com/beginners-guide-simple-chat-bot-fb-based-on-flask-and-heroku-2g7v32ab
 import random
 from flask import Flask, request
 from pymessenger.bot import Bot
 
+#from tensorflow import keras
+from keras.models import load_model
+
 app = Flask(__name__)       # Initializing our Flask application
-ACCESS_TOKEN = 'EAAJvluWmu6sBABZCeNWhvZB7n65nDebvK5Eb6efr1bwZArhWZCHFrbdYcateyzaN2QlcHV5mXkT8nsuShEBS1VpKifZCTKIQelfv4cKB56oOPZCX4PBMZCKBT8aizz9MB3Lb2ssreLzUwACxrbENPK3sZAeful5ezLIynd03yA0UwQZDZD'
-VERIFY_TOKEN = 'EAAJvluWmu6sBABZCeNWhvZB7n65nDebvK5Eb6efr1bwZArhWZCHFrbdYcateyzaN2QlcHV5mXkT8nsuShEBS1VpKifZCTKIQelfv4cKB56oOPZCX4PBMZCKBT8aizz9MB3Lb2ssreLzUwACxrbENPK3sZAeful5ezLIynd03yA0UwQZDZDAS'
+ACCESS_TOKEN = 'EAAJvluWmu6sBABpEc1A4S5kRE5PoGVpDU3hsi978XAdkHoE3kWmZAWdZABCo7G0RUafZBTPNlztYJZC6GHZAI1P4IEZCTa9km2FR9jGgeAa2xjZC8ZBfItn71HwYsvJliaKuNOZA94bBrAf8zwyQZBK1qZBZCAJWj3SxBLOmIzstE7gGvAZDZD'
+VERIFY_TOKEN = 'EAAJvluWmu6sBABpEc1A4S5kRE5PoGVpDU3hsi978XAdkHoE3kWmZAWdZABCo7G0RUafZBTPNlztYJZC6GHZAI1P4IEZCTa9km2FR9jGgeAa2xjZC8ZBfItn71HwYsvJliaKuNOZA94bBrAf8zwyQZBK1qZBZCAJWj3SxBLOmIzstE7gGvAZDZDAS'
 bot = Bot(ACCESS_TOKEN)
+
+#load the model
+model = load_model('training_model.h5')
 
 # Importing standard route and two requst types: GET and POST.
 # We will receive messages that Facebook sends our bot at this endpoint
