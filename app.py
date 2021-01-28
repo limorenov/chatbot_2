@@ -202,20 +202,8 @@ def receive_message():
         return verify_fb_token(token_sent)
     # If the request was not GET, it  must be POSTand we can just proceed with sending a message
     # back to user
-    
-    if request.method == 'POST':
-        payload = request.json
-        event = payload['entry'][0]['messaging']
-        for x in event:
-            if is_user_message(x):
-                text = x['message']['text']
-                sender_id = x['sender']['id']
-                #respond(sender_id, text)
-                response_sent_text = get_message(text)
-                send_message(recipient_id, response_sent_text
-        return "Message Processed"
-    """ else:
-            # get whatever message a user sent the bot
+    else:
+        # get whatever message a user sent the bot
         output = request.get_json()
         for event in output['entry']:
             messaging = event['messaging']
@@ -224,14 +212,13 @@ def receive_message():
                     # Facebook Messenger ID for user so we know where to send response back to
                     recipient_id = message['sender']['id']
                     if message['message'].get('text'):
-                        text = event['message']['text']
-                        response_sent_text = get_message(text)
+                        response_sent_text = get_message(message['message'].get('text'))
                         send_message(recipient_id, response_sent_text)
                     # if user send us a GIF, photo, video or any other non-text item
-                    if message['message'].get('attachments'):
-                        response_sent_text = get_message(text)
-                        send_message(recipient_id, response_sent_text)
-    return "Message Processed" """
+                    #if message['message'].get('attachments'):
+                    #    response_sent_text = get_message()
+                    #    send_message(recipient_id, response_sent_text)
+    return "Message Processed"
 
 
 def verify_fb_token(token_sent):
