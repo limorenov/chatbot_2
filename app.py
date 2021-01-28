@@ -1,12 +1,12 @@
 import random
 from flask import Flask, request
-#from tensorflow import keras
-#from keras.models import load_model
+from tensorflow import keras
+from keras.models import load_model
 from pymessenger.bot import Bot
 
 app = Flask(__name__)       # Initializing our Flask application
-ACCESS_TOKEN = 'EAAJvluWmu6sBABch7zeNxBktE0Oi5seSedJrUXSl0nJRUkTYoBycIiRl7u8GnZCBDikb8ZCZAylEN9igSPlyWVsSlSrWoQTj3MACv6katBMmrjoupvjfE6lusqALqj65GRLQ9c4OzsVxYEZC27MkaT0dHSOfHaIZB6aPVOKfQVQZDZD'
-VERIFY_TOKEN = 'EAAJvluWmu6sBABch7zeNxBktE0Oi5seSedJrUXSl0nJRUkTYoBycIiRl7u8GnZCBDikb8ZCZAylEN9igSPlyWVsSlSrWoQTj3MACv6katBMmrjoupvjfE6lusqALqj65GRLQ9c4OzsVxYEZC27MkaT0dHSOfHaIZB6aPVOKfQVQZDZDas'
+ACCESS_TOKEN = 'EAAJvluWmu6sBABZCeNWhvZB7n65nDebvK5Eb6efr1bwZArhWZCHFrbdYcateyzaN2QlcHV5mXkT8nsuShEBS1VpKifZCTKIQelfv4cKB56oOPZCX4PBMZCKBT8aizz9MB3Lb2ssreLzUwACxrbENPK3sZAeful5ezLIynd03yA0UwQZDZD'
+VERIFY_TOKEN = 'EAAJvluWmu6sBABZCeNWhvZB7n65nDebvK5Eb6efr1bwZArhWZCHFrbdYcateyzaN2QlcHV5mXkT8nsuShEBS1VpKifZCTKIQelfv4cKB56oOPZCX4PBMZCKBT8aizz9MB3Lb2ssreLzUwACxrbENPK3sZAeful5ezLIynd03yA0UwQZDZDAS'
 bot = Bot(ACCESS_TOKEN)
 
 # Importing standard route and two requst types: GET and POST.
@@ -63,5 +63,5 @@ def send_message(recipient_id, response):
 
 # Add description here about this if statement.
 if __name__ == "__main__":
-    #model = load_model('training_model.h5')
+    model = load_model('training_model.h5')
     app.run()
