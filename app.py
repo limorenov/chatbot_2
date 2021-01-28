@@ -191,6 +191,25 @@ def decode_response(test_input):
         states_value = [hidden_state, cell_state]
     return decoded_sentence
 
+def verify_fb_token(token_sent):
+    # take token sent by Facebook and verify it matches the verify token you sent
+    # if they match, allow the request, else return an error
+    if token_sent == VERIFY_TOKEN:
+        return request.args.get("hub.challenge")
+    return 'Invalid verification token'
+
+
+def get_message(message):
+    # return selected item to the user
+    return generate_response(message)
+
+
+# Uses PyMessenger to send response to the user
+def send_message(recipient_id, response):
+    # sends user the text message provided via input response parameter
+    bot.send_text_message(recipient_id, response)
+    return "success"
+
 # Importing standard route and two requst types: GET and POST.
 # We will receive messages that Facebook sends our bot at this endpoint
 @app.route('/', methods=['GET', 'POST'])
@@ -214,42 +233,23 @@ def receive_message():
                     if message['message'].get('text'):
                         response_sent_text = get_message(message['message'].get('text'))
                         send_message(recipient_id, response_sent_text)
-                    # if user send us a GIF, photo, video or any other non-text item
-                    #if message['message'].get('attachments'):
-                    #    response_sent_text = get_message()
-                    #    send_message(recipient_id, response_sent_text)
     return "Message Processed"
 
+#load model #1
+#model = load_model('training_model.h5')
+#load_full_model(model)
 
-def verify_fb_token(token_sent):
-    # take token sent by Facebook and verify it matches the verify token you sent
-    # if they match, allow the request, else return an error
-    if token_sent == VERIFY_TOKEN:
-        return request.args.get("hub.challenge")
-    return 'Invalid verification token'
-
-
-def get_message(message):
-    # return selected item to the user
-    return generate_response(message)
-
-
-# Uses PyMessenger to send response to the user
-def send_message(recipient_id, response):
-    # sends user the text message provided via input response parameter
-    bot.send_text_message(recipient_id, response)
-    return "success"
-
-model = load_model('training_model.h5')
+#load model #2
+json_file = open("model.json", 'r')
+loaded_model_json = json_file.read()
+json_file.close()
+model = model_from_json(loaded_model_json)
+model.load_weights('model.h5')
 load_full_model(model)
 
 # Add description here about this if statement.
 if __name__ == "__main__":
     #load the model
     
-    #json_file = open("model.json", 'r')
-    #loaded_model_json = json_file.read()
-    #json_file.close()
-    #model = model_from_json(loaded_model_json)
-    #model.load_weights('model.h5')
+   
     app.run()
