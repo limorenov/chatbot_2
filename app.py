@@ -5,6 +5,7 @@ from pymessenger.bot import Bot
 
 #from tensorflow import keras
 from keras.models import load_model
+from keras.models import model_from_json
 
 app = Flask(__name__)       # Initializing our Flask application
 ACCESS_TOKEN = 'EAAJvluWmu6sBABpEc1A4S5kRE5PoGVpDU3hsi978XAdkHoE3kWmZAWdZABCo7G0RUafZBTPNlztYJZC6GHZAI1P4IEZCTa9km2FR9jGgeAa2xjZC8ZBfItn71HwYsvJliaKuNOZA94bBrAf8zwyQZBK1qZBZCAJWj3SxBLOmIzstE7gGvAZDZD'
@@ -12,7 +13,12 @@ VERIFY_TOKEN = 'EAAJvluWmu6sBABpEc1A4S5kRE5PoGVpDU3hsi978XAdkHoE3kWmZAWdZABCo7G0
 bot = Bot(ACCESS_TOKEN)
 
 #load the model
-model = load_model('training_model.h5')
+#model = load_model('training_model.h5')
+json_file = open("model.json", 'r')
+loaded_model_json = json_file.read()
+json_file.close()
+model = model_from_json(loaded_model_json)
+model.load_weights('model.h5')
 
 # Importing standard route and two requst types: GET and POST.
 # We will receive messages that Facebook sends our bot at this endpoint
