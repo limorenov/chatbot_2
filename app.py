@@ -1,6 +1,5 @@
 import random
 from flask import Flask, request
-import tensorflow as tf
 from pymessenger.bot import Bot
 
 app = Flask(__name__)       # Initializing our Flask application
@@ -59,8 +58,6 @@ def send_message(recipient_id, response):
     bot.send_text_message(recipient_id, response)
     return "success"
 
-
 # Add description here about this if statement.
 if __name__ == "__main__":
-    modeltrain = tf.keras.models.load_model('training_model.h5')
     app.run()
