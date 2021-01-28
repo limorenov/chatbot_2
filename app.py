@@ -203,7 +203,18 @@ def receive_message():
     # If the request was not GET, it  must be POSTand we can just proceed with sending a message
     # back to user
     
-    else:
+    if request.method == 'POST':
+        payload = request.json
+        event = payload['entry'][0]['messaging']
+        for x in event:
+            if is_user_message(x):
+                text = x['message']['text']
+                sender_id = x['sender']['id']
+                #respond(sender_id, text)
+                response_sent_text = get_message(text)
+                send_message(recipient_id, response_sent_text
+        return "ok"
+    """ else:
             # get whatever message a user sent the bot
         output = request.get_json()
         for event in output['entry']:
@@ -220,7 +231,7 @@ def receive_message():
                     if message['message'].get('attachments'):
                         response_sent_text = get_message(text)
                         send_message(recipient_id, response_sent_text)
-    return "Message Processed"
+    return "Message Processed" """
 
 
 def verify_fb_token(token_sent):
