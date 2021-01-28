@@ -236,7 +236,7 @@ def receive_message():
     return "Message Processed"
 
 #load model #1
-#model = load_model('training_model.h5')
+model = load_model('training_model.h5')
 #load_full_model(model)
 
 #load model #2
@@ -250,6 +250,4 @@ load_full_model(model)
 # Add description here about this if statement.
 if __name__ == "__main__":
     #load the model
-    
-   
     app.run()
