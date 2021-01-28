@@ -14,11 +14,11 @@ bot = Bot(ACCESS_TOKEN)
 
 #load the model
 #model = load_model('training_model.h5')
-json_file = open("model.json", 'r')
-loaded_model_json = json_file.read()
-json_file.close()
-model = model_from_json(loaded_model_json)
-model.load_weights('model.h5')
+#json_file = open("model.json", 'r')
+#loaded_model_json = json_file.read()
+#json_file.close()
+#model = model_from_json(loaded_model_json)
+#model.load_weights('model.h5')
 
 # Importing standard route and two requst types: GET and POST.
 # We will receive messages that Facebook sends our bot at this endpoint
