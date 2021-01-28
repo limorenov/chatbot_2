@@ -12,13 +12,7 @@ ACCESS_TOKEN = 'EAAJvluWmu6sBAOoduRDe6ETdhN02AQBt8yYOQQFvdl7WUR0o3rCCcEEDGVHT5sP
 VERIFY_TOKEN = 'EAAJvluWmu6sBAOoduRDe6ETdhN02AQBt8yYOQQFvdl7WUR0o3rCCcEEDGVHT5sPolQcp7TJH7S4n1EykDbL9t03dY3QDvegacrXWnOjcF6oMJlZAZAfuaVw95a0guHZCbLHnulFdvzA5ZAzY4GenX2HPAqpe63CZCeYs2ia2wnAZDZDas'
 bot = Bot(ACCESS_TOKEN)
 
-#load the model
-#model = load_model('training_model.h5')
-#json_file = open("model.json", 'r')
-#loaded_model_json = json_file.read()
-#json_file.close()
-#model = model_from_json(loaded_model_json)
-#model.load_weights('model.h5')
+
 
 # Importing standard route and two requst types: GET and POST.
 # We will receive messages that Facebook sends our bot at this endpoint
@@ -73,4 +67,11 @@ def send_message(recipient_id, response):
 
 # Add description here about this if statement.
 if __name__ == "__main__":
+    #load the model
+    model = load_model('training_model.h5')
+    #json_file = open("model.json", 'r')
+    #loaded_model_json = json_file.read()
+    #json_file.close()
+    #model = model_from_json(loaded_model_json)
+    #model.load_weights('model.h5')
     app.run()
