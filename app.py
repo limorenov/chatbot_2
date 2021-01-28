@@ -202,6 +202,7 @@ def receive_message():
         return verify_fb_token(token_sent)
     # If the request was not GET, it  must be POSTand we can just proceed with sending a message
     # back to user
+    
     else:
             # get whatever message a user sent the bot
         output = request.get_json()
@@ -212,12 +213,12 @@ def receive_message():
                     # Facebook Messenger ID for user so we know where to send response back to
                     recipient_id = message['sender']['id']
                     if message['message'].get('text'):
-                        text = x['message']['text']
+                        text = event['message']['text']
                         response_sent_text = get_message(text)
                         send_message(recipient_id, response_sent_text)
                     # if user send us a GIF, photo, video or any other non-text item
                     if message['message'].get('attachments'):
-                        response_sent_text = get_message()
+                        response_sent_text = get_message(text)
                         send_message(recipient_id, response_sent_text)
     return "Message Processed"
 
