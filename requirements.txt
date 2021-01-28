@@ -4,3 +4,5 @@ gunicorn
 pymessenger
 keras
 tensorflow-cpu
+h5py==2.10.0
+wheel==0.35
