@@ -213,7 +213,7 @@ def receive_message():
                 #respond(sender_id, text)
                 response_sent_text = get_message(text)
                 send_message(recipient_id, response_sent_text
-        return "ok"
+        return "Message Processed"
     """ else:
             # get whatever message a user sent the bot
         output = request.get_json()
