@@ -240,11 +240,13 @@ def send_message(recipient_id, response):
     bot.send_text_message(recipient_id, response)
     return "success"
 
+model = load_model('training_model.h5')
+load_full_model(model)
+
 # Add description here about this if statement.
 if __name__ == "__main__":
     #load the model
-    model = load_model('training_model.h5')
-    load_full_model(model)
+    
     #json_file = open("model.json", 'r')
     #loaded_model_json = json_file.read()
     #json_file.close()
