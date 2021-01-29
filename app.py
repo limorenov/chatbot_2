@@ -238,7 +238,7 @@ def receive_message():
 
 #load model #1
 model = load_model('training_model.h5')
-load_full_model(model)
+
 
 #load model #2
 json_file = open("model.json", 'r')
@@ -246,7 +246,7 @@ loaded_model_json = json_file.read()
 json_file.close()
 model = model_from_json(loaded_model_json)
 model.load_weights('model.h5')
-
+load_full_model(model)
 
 # Add description here about this if statement.
 if __name__ == "__main__":
