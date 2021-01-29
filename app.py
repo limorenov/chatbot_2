@@ -204,7 +204,7 @@ def receive_message():
     # If the request was not GET, it  must be POSTand we can just proceed with sending a message
     # back to user
     else:
-        # get whatever message a user sent the bot
+            # get whatever message a user sent the bot
         output = request.get_json()
         for event in output['entry']:
             messaging = event['messaging']
@@ -213,9 +213,14 @@ def receive_message():
                     # Facebook Messenger ID for user so we know where to send response back to
                     recipient_id = message['sender']['id']
                     if message['message'].get('text'):
-                        response_sent_text = get_message(message['message'].get('text'))
+                        response_sent_text = get_message()
+                        send_message(recipient_id, response_sent_text)
+                    # if user send us a GIF, photo, video or any other non-text item
+                    if message['message'].get('attachments'):
+                        response_sent_text = get_message()
                         send_message(recipient_id, response_sent_text)
     return "Message Processed"
+
 
 def verify_fb_token(token_sent):
     # take token sent by Facebook and verify it matches the verify token you sent
@@ -225,9 +230,11 @@ def verify_fb_token(token_sent):
     return 'Invalid verification token'
 
 
-def get_message(message):
+def get_message():
+    sample_responses = ["You are stunning!", "We're proud of you",
+                        "Keep on being you!", "We're greatful to know you :)"]
     # return selected item to the user
-    return generate_response(message)
+    return random.choice(sample_responses)
 
 
 # Uses PyMessenger to send response to the user
@@ -237,8 +244,8 @@ def send_message(recipient_id, response):
     return "success"
 
 #load model #1
-#chatbotmodel = load_model('training_model.h5')
-#load_full_model(chatbotmodel)
+chatbotmodel = load_model('training_model.h5')
+load_full_model(chatbotmodel)
 
 # Add description here about this if statement.
 if __name__ == "__main__":
