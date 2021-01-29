@@ -119,8 +119,6 @@ def load_full_model(training_model):
     decoder_dense = Dense(num_decoder_tokens, activation='softmax')
     decoder_outputs = decoder_dense(decoder_outputs)
     
-    #Model
-    training_model = Model([encoder_inputs, decoder_inputs], decoder_outputs)
     #Compiling
     training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'], sample_weight_mode='temporal')
 
