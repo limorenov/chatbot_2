@@ -17,8 +17,8 @@ bot = Bot(ACCESS_TOKEN)
 
 def load_full_model():
     
-    data_path = "preguntas7.txt"
-    data_path2 = "respuestas7.txt"
+    data_path = "preguntas8.txt"
+    data_path2 = "respuestas8.txt"
     with open(data_path.encode('utf-8'), 'r') as f:
       lines = f.read().split('\n')
     with open(data_path2.encode('utf-8'), 'r') as f:
@@ -120,14 +120,18 @@ def load_full_model():
     decoder_outputs = decoder_dense(decoder_outputs)
 
     #Load the model
+    #training_model = load_model("training_model.h5")
+    
     json_file = open("model.json", 'r')
     loaded_model_json = json_file.read()
     json_file.close()
     training_model = model_from_json(loaded_model_json)
-    training_model.load_weights('model.h5')
+    training_model.load_weights('weigths.h5')
+    training_model.compile(loss='categorical_crossentropy', optimizer='adam')
+    
 
     #Compiling
-    training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'], sample_weight_mode='temporal')
+    #training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'], sample_weight_mode='temporal')
 
     encoder_inputs = training_model.input[0]
     encoder_outputs, state_h_enc, state_c_enc = training_model.layers[2].output
