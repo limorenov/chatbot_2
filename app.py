@@ -17,8 +17,8 @@ bot = Bot(ACCESS_TOKEN)
 
 def load_full_model(training_model):
     
-    data_path = "preguntas8.txt"
-    data_path2 = "respuestas8.txt"
+    data_path = "preguntas7.txt"
+    data_path2 = "respuestas7.txt"
     with open(data_path.encode('utf-8'), 'r') as f:
       lines = f.read().split('\n')
     with open(data_path2.encode('utf-8'), 'r') as f:
@@ -237,16 +237,8 @@ def receive_message():
 
 
 #load model #1
-model = load_model('training_model.h5')
-load_full_model(model)
-
-#load model #2
-#json_file = open("model.json", 'r')
-#loaded_model_json = json_file.read()
-#json_file.close()
-#model = model_from_json(loaded_model_json)
-#model.load_weights('model.h5')
-#load_full_model(model)
+chatbotmodel = load_model('training_model.h5')
+load_full_model(chatbotmodel)
 
 # Add description here about this if statement.
 if __name__ == "__main__":
