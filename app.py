@@ -17,8 +17,8 @@ bot = Bot(ACCESS_TOKEN)
 
 def load_full_model(training_model):
     
-    data_path = "preguntas8.txt"
-    data_path2 = "respuestas8.txt"
+    data_path = "preguntas7.txt"
+    data_path2 = "respuestas7.txt"
     with open(data_path.encode('utf-8'), 'r') as f:
       lines = f.read().split('\n')
     with open(data_path2.encode('utf-8'), 'r') as f:
@@ -119,9 +119,6 @@ def load_full_model(training_model):
     decoder_dense = Dense(num_decoder_tokens, activation='softmax')
     decoder_outputs = decoder_dense(decoder_outputs)
     
-    #Compiling
-    training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'], sample_weight_mode='temporal')
-
     #Load the model
     encoder_inputs = training_model.input[0]
     encoder_outputs, state_h_enc, state_c_enc = training_model.layers[2].output
@@ -238,10 +235,9 @@ def receive_message():
                         send_message(recipient_id, response_sent_text)
     return "Message Processed"
 
-
-
+load_full_model(model)
 #load model #1
-#model = load_model('training_model.h5')
+model = load_model('training_model.h5')
 #load_full_model(model)
 
 #load model #2
@@ -249,8 +245,8 @@ json_file = open("model.json", 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 model = model_from_json(loaded_model_json)
-model.load_weights('weigths.h5')
-load_full_model(model)
+model.load_weights('model.h5')
+
 
 # Add description here about this if statement.
 if __name__ == "__main__":
