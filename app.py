@@ -17,8 +17,8 @@ bot = Bot(ACCESS_TOKEN)
 
 def load_full_model(training_model):
     
-    data_path = "preguntas7.txt"
-    data_path2 = "respuestas7.txt"
+    data_path = "preguntas8.txt"
+    data_path2 = "respuestas8.txt"
     with open(data_path.encode('utf-8'), 'r') as f:
       lines = f.read().split('\n')
     with open(data_path2.encode('utf-8'), 'r') as f:
@@ -235,10 +235,10 @@ def receive_message():
                         send_message(recipient_id, response_sent_text)
     return "Message Processed"
 
-load_full_model(model)
+
 #load model #1
 model = load_model('training_model.h5')
-#load_full_model(model)
+load_full_model(model)
 
 #load model #2
 json_file = open("model.json", 'r')
