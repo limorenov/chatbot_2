@@ -120,9 +120,9 @@ def load_full_model(training_model):
     decoder_outputs = decoder_dense(decoder_outputs)
     
     #Model
-training_model = Model([encoder_inputs, decoder_inputs], decoder_outputs)
-#Compiling
-training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'], sample_weight_mode='temporal')
+    training_model = Model([encoder_inputs, decoder_inputs], decoder_outputs)
+    #Compiling
+    training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'], sample_weight_mode='temporal')
 
     #Load the model
     encoder_inputs = training_model.input[0]
