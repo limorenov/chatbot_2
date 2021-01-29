@@ -15,7 +15,7 @@ ACCESS_TOKEN = 'EAAJvluWmu6sBAOoduRDe6ETdhN02AQBt8yYOQQFvdl7WUR0o3rCCcEEDGVHT5sP
 VERIFY_TOKEN = 'EAAJvluWmu6sBAOoduRDe6ETdhN02AQBt8yYOQQFvdl7WUR0o3rCCcEEDGVHT5sPolQcp7TJH7S4n1EykDbL9t03dY3QDvegacrXWnOjcF6oMJlZAZAfuaVw95a0guHZCbLHnulFdvzA5ZAzY4GenX2HPAqpe63CZCeYs2ia2wnAZDZDas'
 bot = Bot(ACCESS_TOKEN)
 
-def load_full_model(training_model):
+def load_full_model():
     
     data_path = "preguntas7.txt"
     data_path2 = "respuestas7.txt"
@@ -123,6 +123,12 @@ def load_full_model(training_model):
     training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'], sample_weight_mode='temporal')
 
     #Load the model
+    json_file = open("model.json", 'r')
+    loaded_model_json = json_file.read()
+    json_file.close()
+    training_model = model_from_json(loaded_model_json)
+    training_model.load_weights('model.h5')
+
     encoder_inputs = training_model.input[0]
     encoder_outputs, state_h_enc, state_c_enc = training_model.layers[2].output
     encoder_states = [state_h_enc, state_c_enc]
@@ -245,12 +251,8 @@ def receive_message():
 #load_full_model(model)
 
 #load model #2
-json_file = open("model.json", 'r')
-loaded_model_json = json_file.read()
-json_file.close()
-model = model_from_json(loaded_model_json)
-model.load_weights('model.h5')
-load_full_model(model)
+
+load_full_model()
 
 # Add description here about this if statement.
 if __name__ == "__main__":
