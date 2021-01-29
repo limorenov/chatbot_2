@@ -127,7 +127,7 @@ def load_full_model():
     json_file.close()
     training_model = model_from_json(loaded_model_json)
     training_model.load_weights('weigths.h5')
-    training_model.compile(loss='categorical_crossentropy', optimizer='adam')
+    #training_model.compile(loss='categorical_crossentropy', optimizer='adam')
     
 
     #Compiling
