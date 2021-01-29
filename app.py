@@ -204,7 +204,7 @@ def receive_message():
     # If the request was not GET, it  must be POSTand we can just proceed with sending a message
     # back to user
     else:
-            # get whatever message a user sent the bot
+        # get whatever message a user sent the bot
         output = request.get_json()
         for event in output['entry']:
             messaging = event['messaging']
@@ -217,7 +217,6 @@ def receive_message():
                         send_message(recipient_id, response_sent_text)
     return "Message Processed"
 
-
 def verify_fb_token(token_sent):
     # take token sent by Facebook and verify it matches the verify token you sent
     # if they match, allow the request, else return an error
@@ -227,8 +226,6 @@ def verify_fb_token(token_sent):
 
 
 def get_message(message):
-    sample_responses = ["You are stunning!", "We're proud of you",
-                        "Keep on being you!", "We're greatful to know you :)"]
     # return selected item to the user
     return generate_response(message)
 
@@ -239,10 +236,9 @@ def send_message(recipient_id, response):
     bot.send_text_message(recipient_id, response)
     return "success"
 
-
 #load model #1
-chatbotmodel = load_model('training_model.h5')
-load_full_model(chatbotmodel)
+#chatbotmodel = load_model('training_model.h5')
+#load_full_model(chatbotmodel)
 
 # Add description here about this if statement.
 if __name__ == "__main__":
