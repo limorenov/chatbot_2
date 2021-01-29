@@ -118,9 +118,6 @@ def load_full_model():
     decoder_outputs, decoder_state_hidden, decoder_state_cell = decoder_lstm(decoder_inputs, initial_state=encoder_states)
     decoder_dense = Dense(num_decoder_tokens, activation='softmax')
     decoder_outputs = decoder_dense(decoder_outputs)
-    
-    #Compiling
-    training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'], sample_weight_mode='temporal')
 
     #Load the model
     json_file = open("model.json", 'r')
@@ -128,6 +125,9 @@ def load_full_model():
     json_file.close()
     training_model = model_from_json(loaded_model_json)
     training_model.load_weights('model.h5')
+
+    #Compiling
+    training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'], sample_weight_mode='temporal')
 
     encoder_inputs = training_model.input[0]
     encoder_outputs, state_h_enc, state_c_enc = training_model.layers[2].output
