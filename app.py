@@ -235,6 +235,7 @@ def receive_message():
                         send_message(recipient_id, response_sent_text)
     return "Message Processed"
 
+load_full_model(model)
 #load model #1
 model = load_model('training_model.h5')
 #load_full_model(model)
@@ -245,7 +246,7 @@ loaded_model_json = json_file.read()
 json_file.close()
 model = model_from_json(loaded_model_json)
 model.load_weights('model.h5')
-load_full_model(model)
+
 
 # Add description here about this if statement.
 if __name__ == "__main__":
