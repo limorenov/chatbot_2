@@ -119,6 +119,11 @@ def load_full_model(training_model):
     decoder_dense = Dense(num_decoder_tokens, activation='softmax')
     decoder_outputs = decoder_dense(decoder_outputs)
     
+    #Model
+training_model = Model([encoder_inputs, decoder_inputs], decoder_outputs)
+#Compiling
+training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'], sample_weight_mode='temporal')
+
     #Load the model
     encoder_inputs = training_model.input[0]
     encoder_outputs, state_h_enc, state_c_enc = training_model.layers[2].output
@@ -235,10 +240,11 @@ def receive_message():
                         send_message(recipient_id, response_sent_text)
     return "Message Processed"
 
-load_full_model(model)
+
+
 #load model #1
 model = load_model('training_model.h5')
-#load_full_model(model)
+load_full_model(model)
 
 #load model #2
 json_file = open("model.json", 'r')
